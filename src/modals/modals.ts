@@ -1,12 +1,13 @@
 const modals = () => {
+    //type?
     function bindModal(triggerSelector: any, modalSelector: any, closeSelector: any) {
-
+    //type?
         const trigger: any = document.querySelectorAll(triggerSelector),
-            modal: any = document.querySelector(modalSelector),
-            close: any = document.querySelector(closeSelector)
+            modal: HTMLElement = document.querySelector(modalSelector),
+            close: HTMLElement = document.querySelector(closeSelector)
 
-        trigger.forEach((item: any) => {
-            item.addEventListener('click', (e: any) => {
+        trigger.forEach((item: HTMLElement) => {
+            item.addEventListener('click', (e: KeyboardEvent) => {
                 if (e.target) {
                     e.preventDefault()
                 }
@@ -20,7 +21,7 @@ const modals = () => {
             document.body.style.overflow = '';
         })
 
-        modal.addEventListener('click', (e: any) => {
+        modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {
                 modal.style.display = 'none'
                 document.body.style.overflow = '';
@@ -28,8 +29,8 @@ const modals = () => {
             }
         })
     }
-
-    function showModalByTime(selector: any, time: any) {
+    //type of selector?
+    function showModalByTime(selector: any, time: number) {
         setTimeout(function () {
             document.querySelector(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
