@@ -1,21 +1,17 @@
-export const forms = () => {
-    const forms: NodeListOf<HTMLElement> = document.querySelectorAll('form'),
-        inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input'),
-        phoneInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name = "user_phone"]');
+import {checkNumInputs} from './checkNumInputs';
 
-    phoneInputs.forEach((phoneInput: HTMLInputElement) => {
-        phoneInput.addEventListener('input', () => {
-                phoneInput.value = phoneInput.value.replace(/\D/, '')
-            }
-        )
-    })
+export const forms = (state: any) => {
+    const forms: NodeListOf<HTMLElement> = document.querySelectorAll('form'),
+        inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
+
+    checkNumInputs('input[name = "user_phone"]');
 
     const message = {
         loading: 'Loading...',
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     }
-//вот тут приходит data - с разных форм - какой тип
+
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -23,6 +19,7 @@ export const forms = () => {
             body: data
         })
         return await res.text();
+        // console.log(res.text())
     }
 
     const clearInputs = () => {
@@ -41,9 +38,16 @@ export const forms = () => {
 
         const formData = new FormData(form);
 
+        if (form.getAttribute('data-calc') === 'end') {
+            for (let key in state) {
+                formData.append(key, state[key])
+            }
+        }
+
         postData('assets/server.php', formData)
             .then(res => {
                 console.log(res)
+                statusMessage.textContent = message.success
             })
             .catch(() => statusMessage.textContent = message.failure)
             .finally(() => {

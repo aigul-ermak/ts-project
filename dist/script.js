@@ -14000,6 +14000,111 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
+/***/ "./src/modals/changeModalState.ts":
+/*!****************************************!*\
+  !*** ./src/modals/changeModalState.ts ***!
+  \****************************************/
+/*! exports provided: changeModalState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeModalState", function() { return changeModalState; });
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/modals/checkNumInputs.ts");
+
+const changeModalState = (state) => {
+    const windowForms = document.querySelectorAll('.balcon_icons_img'), windowWidth = document.querySelectorAll('#width'), windowHeight = document.querySelectorAll('#height'), windowType = document.querySelectorAll('#view_type'), windowProfile = document.querySelectorAll('.checkbox');
+    Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["checkNumInputs"])('#width');
+    Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["checkNumInputs"])('#height');
+    function bindActionToElems({ event, elems, prop }) {
+        elems.forEach((elem, i) => {
+            elem.addEventListener(event, () => {
+                switch (elem.nodeName) {
+                    case 'SPAN':
+                        state[prop] = i;
+                        break;
+                    case 'INPUT':
+                        if (elem.getAttribute('type') === 'checkbox') {
+                            // @ts-ignore
+                            i === 0 ? state[prop] = 'Холодное' : state[prop] = 'Теплое';
+                        }
+                        else {
+                            elems.forEach((box, j) => {
+                                elem.checked = false;
+                                if (i == j) {
+                                    box.Checked = true;
+                                }
+                            });
+                            state[prop] = elem.value;
+                        }
+                        break;
+                    case 'SELECT':
+                        state[prop] = elem.value;
+                        break;
+                }
+                console.log(state);
+            });
+        });
+    }
+    console.log(state);
+    windowForms.forEach((windowForm, i) => {
+        windowForm.addEventListener('click', () => {
+            state.form = (i);
+            // console.log(state)
+        });
+    });
+    bindActionToElems({
+        event: 'click',
+        elems: windowForms,
+        prop: 'form'
+    });
+    bindActionToElems({
+        event: 'input',
+        elems: windowWidth,
+        prop: 'width'
+    });
+    bindActionToElems({
+        event: 'input',
+        elems: windowHeight,
+        prop: 'height'
+    });
+    bindActionToElems({
+        event: 'change',
+        elems: windowType,
+        prop: 'type'
+    });
+    bindActionToElems({
+        event: 'change',
+        elems: windowProfile,
+        prop: 'profile'
+    });
+};
+
+
+/***/ }),
+
+/***/ "./src/modals/checkNumInputs.ts":
+/*!**************************************!*\
+  !*** ./src/modals/checkNumInputs.ts ***!
+  \**************************************/
+/*! exports provided: checkNumInputs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkNumInputs", function() { return checkNumInputs; });
+const checkNumInputs = (selector) => {
+    const numInputs = document.querySelectorAll(selector);
+    numInputs.forEach(numInput => {
+        numInput.addEventListener('input', () => {
+            numInput.value = numInput.value.replace(/\D/, '');
+        });
+    });
+};
+
+
+/***/ }),
+
 /***/ "./src/modals/forms.ts":
 /*!*****************************!*\
   !*** ./src/modals/forms.ts ***!
@@ -14010,19 +14115,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forms", function() { return forms; });
-const forms = () => {
-    const forms = document.querySelectorAll('form'), inputs = document.querySelectorAll('input'), phoneInputs = document.querySelectorAll('input[name = "user_phone"]');
-    phoneInputs.forEach((phoneInput) => {
-        phoneInput.addEventListener('input', () => {
-            phoneInput.value = phoneInput.value.replace(/\D/, '');
-        });
-    });
+/* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/modals/checkNumInputs.ts");
+
+const forms = (state) => {
+    const forms = document.querySelectorAll('form'), inputs = document.querySelectorAll('input');
+    Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["checkNumInputs"])('input[name = "user_phone"]');
     const message = {
         loading: 'Loading...',
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     };
-    //вот тут приходит data - с разных форм - какой тип
     const postData = async (url, data) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -14030,6 +14132,7 @@ const forms = () => {
             body: data
         });
         return await res.text();
+        // console.log(res.text())
     };
     const clearInputs = () => {
         inputs.forEach((input) => {
@@ -14044,9 +14147,15 @@ const forms = () => {
         statusMessage.classList.add('status');
         form.appendChild(statusMessage);
         const formData = new FormData(form);
+        if (form.getAttribute('data-calc') === 'end') {
+            for (let key in state) {
+                formData.append(key, state[key]);
+            }
+        }
         postData('assets/server.php', formData)
             .then(res => {
             console.log(res);
+            statusMessage.textContent = message.success;
         })
             .catch(() => statusMessage.textContent = message.failure)
             .finally(() => {
@@ -14192,11 +14301,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modals_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/modals */ "./src/modals/modals.ts");
 /* harmony import */ var _modals_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/tabs */ "./src/modals/tabs.ts");
 /* harmony import */ var _modals_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/forms */ "./src/modals/forms.ts");
+/* harmony import */ var _modals_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/changeModalState */ "./src/modals/changeModalState.ts");
+
 
 
 
 
 window.addEventListener('DOMContentLoaded', () => {
+    'use strict';
+    let modalState = {};
+    Object(_modals_changeModalState__WEBPACK_IMPORTED_MODULE_4__["changeModalState"])(modalState);
     Object(_modals_modals__WEBPACK_IMPORTED_MODULE_1__["modals"])();
     Object(_modals_tabs__WEBPACK_IMPORTED_MODULE_2__["tabs"])({
         headerSelector: '.glazing_slider',
@@ -14217,7 +14331,7 @@ window.addEventListener('DOMContentLoaded', () => {
         activeSelector: 'do_image_more',
         display: 'inline-block'
     });
-    Object(_modals_forms__WEBPACK_IMPORTED_MODULE_3__["forms"])();
+    Object(_modals_forms__WEBPACK_IMPORTED_MODULE_3__["forms"])(modalState);
 });
 
 
