@@ -1,49 +1,54 @@
-const modals = () => {
-    //type?
-    function bindModal(triggerSelector: any, modalSelector: any, closeSelector: any) {
-    //type?
-        const trigger: any = document.querySelectorAll(triggerSelector),
-            modal: HTMLElement = document.querySelector(modalSelector),
-            close: HTMLElement = document.querySelector(closeSelector)
+export const modals = () => {
 
-        trigger.forEach((item: HTMLElement) => {
-            item.addEventListener('click', (e: KeyboardEvent) => {
+    const bindModal = ({triggersSelector, modalSelector, closeSelector}: any) => {
+        const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
+            modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
+            close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
+
+        const closeModal = (modalProperty: string, documentProperty: string) => {
+            modal.style.display = modalProperty;
+            document.body.style.overflow = documentProperty;
+        }
+
+        triggers.forEach((trigger: HTMLElement) => {
+            trigger.addEventListener('click', (e: KeyboardEvent) => {
                 if (e.target) {
                     e.preventDefault()
                 }
-                modal.style.display = 'block'
-                document.body.style.overflow = 'hidden';
+                closeModal('block', 'hidden')
             })
         })
 
         close.addEventListener('click', () => {
-            modal.style.display = 'none'
-            document.body.style.overflow = '';
+            closeModal('none', '')
         })
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {
-                modal.style.display = 'none'
-                document.body.style.overflow = '';
-                // document.body.classList.add('.modal-open')
+                closeModal('none', '')
             }
         })
     }
-    //type of selector?
-    function showModalByTime(selector: any, time: number) {
+
+    const showModalByTime = (selector: string, time: number) => {
         setTimeout(function () {
-            document.querySelector(selector).style.display = 'block';
+            document.querySelector<HTMLElement>(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
         }, time)
     }
 
-    bindModal('.popup_engineer_btn',
-        '.popup_engineer',
-        '.popup_engineer .popup_close');
+    bindModal({
+        triggersSelector: '.popup_engineer_btn',
+        modalSelector: '.popup_engineer',
+        closeSelector: '.popup_engineer .popup_close'
+    });
 
-    bindModal('.phone_link', '.popup', '.popup .popup_close')
+    bindModal({
+        triggersSelector: '.phone_link',
+        modalSelector: '.popup', closeSelector: '.popup .popup_close'
+    })
 
     showModalByTime('.popup', 3000)
 }
 
-export default modals;
+
