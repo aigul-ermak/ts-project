@@ -4,14 +4,18 @@ export const modals = () => {
         triggersSelector: any
         modalSelector: string
         closeSelector: string
+        closeClickOverlay?: boolean
     }
 
-    const bindModal = ({triggersSelector, modalSelector, closeSelector}: bindModalType) => {
+    const bindModal = ({triggersSelector, modalSelector, closeSelector, closeClickOverlay = true}: bindModalType) => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
-            close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
+            close: HTMLElement = document.querySelector<HTMLElement>(closeSelector),
+            windows: NodeListOf<HTMLElement> = document.querySelectorAll('[data-modal]');
 
-        console.log(typeof triggers)
+        windows.forEach(window => {
+            window.style.display = 'none'
+        });
 
         const closeModal = (modalProperty: string, documentProperty: string) => {
             modal.style.display = modalProperty;
@@ -32,7 +36,7 @@ export const modals = () => {
         })
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
-            if (e.target === modal) {
+            if (e.target === modal && closeClickOverlay) {
                 closeModal('none', '')
             }
         })
@@ -54,7 +58,26 @@ export const modals = () => {
     bindModal({
         triggersSelector: '.phone_link',
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
-    })
+    });
+
+    bindModal({
+        triggersSelector: '.popup_calc_btn',
+        modalSelector: '.popup_calc',
+        closeSelector: '.popup_calc_close'
+    });
+    bindModal({
+        triggersSelector: '.popup_calc_button',
+        modalSelector: '.popup_calc_profile',
+        closeSelector: '.popup_calc_profile_close',
+        closeClickOverlay: false,
+    });
+    bindModal({
+        triggersSelector: '.popup_calc_profile_button',
+        modalSelector: '.popup_calc_end',
+        closeSelector: '.popup_calc_end_close',
+        closeClickOverlay: false,
+    });
+
 
     // showModalByTime('.popup', 3000)
 }

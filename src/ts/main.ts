@@ -19,6 +19,13 @@ window.addEventListener('DOMContentLoaded', () => {
         contentSelector: '.decoration_content > div > div',
         activeSelector: 'after_click'
     });
+    tabs({
+        headerSelector: '.balcon_icons',
+        tabSelector: '.balcon_icons_img',
+        contentSelector: '.big_img > img',
+        activeSelector: 'do_image_more',
+        display: 'inline-block'
+    });
     forms();
 })
 
