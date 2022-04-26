@@ -4,7 +4,6 @@ import {modals} from '../modals/modals';
 import {tabs} from '../modals/tabs';
 import {forms} from '../modals/forms';
 
-
 window.addEventListener('DOMContentLoaded', () => {
     modals();
     tabs({
