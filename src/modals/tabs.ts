@@ -9,7 +9,7 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     const header: HTMLElement = document.querySelector(headerSelector),
         tabs: NodeListOf<HTMLElement> = document.querySelectorAll(tabSelector),
         content: NodeListOf<HTMLElement> = document.querySelectorAll(contentSelector)
-//
+
     const hideTabContent = () => {
         content.forEach((tab: HTMLElement) => {
             tab.style.display = 'none';
@@ -27,10 +27,10 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     hideTabContent();
     showTabContent();
 
-    header.addEventListener('click', (e: any) => {
-        const target = e.target;
+    header.addEventListener('click', (e: KeyboardEvent) => {
+        const target = e.target as Element;
         if (target.classList.contains(tabSelector.replace(/\./, ''))
-            || target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
+            || (target.parentNode as Element).classList.contains(tabSelector.replace(/\./, ''))) {
             tabs.forEach((tab: HTMLElement, i: number) => {
                 if (target == tab || target.parentNode == tab) {
                     hideTabContent();

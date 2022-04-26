@@ -14068,7 +14068,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabs", function() { return tabs; });
 const tabs = ({ headerSelector, tabSelector, contentSelector, activeSelector }) => {
     const header = document.querySelector(headerSelector), tabs = document.querySelectorAll(tabSelector), content = document.querySelectorAll(contentSelector);
-    //
     const hideTabContent = () => {
         content.forEach((tab) => {
             tab.style.display = 'none';
