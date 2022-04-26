@@ -15,7 +15,7 @@ export const forms = () => {
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     }
-//вот тут приходит data - с разных форм - какой тип
+
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -23,21 +23,19 @@ export const forms = () => {
             body: data
         })
         return await res.text();
-    }
+    };
 
     const clearInputs = () => {
-        inputs.forEach((input: any) => {
-            input.value = ''
-        })
+        inputs.forEach((input: any) => input.value = '');
     }
 
     forms.forEach((form: HTMLFormElement) => {
         form.addEventListener('submit', (e: KeyboardEvent) => {
-            e.preventDefault()
+            e.preventDefault();
         })
         let statusMessage = document.createElement('div');
-        statusMessage.classList.add('status')
-        form.appendChild(statusMessage)
+        statusMessage.classList.add('status');
+        form.appendChild(statusMessage);
 
         const formData = new FormData(form);
 
