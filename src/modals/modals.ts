@@ -1,7 +1,7 @@
 export const modals = () => {
 
     type bindModalType = {
-        triggersSelector: any
+        triggersSelector: string
         modalSelector: string
         closeSelector: string
     }
@@ -10,8 +10,6 @@ export const modals = () => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
             close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
-
-        console.log(typeof triggers)
 
         const closeModal = (modalProperty: string, documentProperty: string) => {
             modal.style.display = modalProperty;
@@ -27,9 +25,8 @@ export const modals = () => {
             })
         })
 
-        close.addEventListener('click', () => {
-            closeModal('none', '')
-        })
+        close.addEventListener('click', () => closeModal('none', ''))
+
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {
