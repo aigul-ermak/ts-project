@@ -1,6 +1,11 @@
 export const modals = () => {
+    type bindModalType = {
+        triggersSelector: string
+        modalSelector: string
+        closeSelector: string
+    }
 
-    const bindModal = ({triggersSelector, modalSelector, closeSelector}: any) => {
+    const bindModal = ({triggersSelector, modalSelector, closeSelector}: bindModalType) => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
             close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
