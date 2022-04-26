@@ -14025,9 +14025,7 @@ const modals = () => {
                 closeModal('block', 'hidden');
             });
         });
-        close.addEventListener('click', () => {
-            closeModal('none', '');
-        });
+        close.addEventListener('click', () => closeModal('none', ''));
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal('none', '');
