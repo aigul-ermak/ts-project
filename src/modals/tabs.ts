@@ -1,21 +1,28 @@
-const tabs = (headerSelector: any, tabSelector: any, contentSelector: any, activeSelector: any) => {
-    const header: any = document.querySelector(headerSelector),
-        tab: any = document.querySelectorAll(tabSelector),
-        content: any = document.querySelectorAll(contentSelector)
+type tabsType = {
+    headerSelector: string
+    tabSelector: string
+    contentSelector: string
+    activeSelector: string
+}
 
-    function hideTabContent() {
-        content.forEach((item: HTMLElement) => {
-            item.style.display = 'none'
-            tab.forEach((item: HTMLElement) => {
-                item.classList.remove(activeSelector)
-            })
-        })
-    }
+export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelector}: tabsType) => {
+    const header: HTMLElement = document.querySelector(headerSelector),
+        tabs: NodeListOf<HTMLElement> = document.querySelectorAll(tabSelector),
+        content: NodeListOf<HTMLElement> = document.querySelectorAll(contentSelector)
+//
+    const hideTabContent = () => {
+        content.forEach((tab: HTMLElement) => {
+            tab.style.display = 'none';
+            tabs.forEach((tab: HTMLElement) => {
+                tab.classList.remove(activeSelector);
+            });
+        });
+    };
 
-    function showTabContent(i: number = 0) {
-        content[i].style.display = 'block'
-        tab[i].classList.add(activeSelector)
-    }
+    const showTabContent = (i: number = 0) => {
+        content[i].style.display = 'block';
+        tabs[i].classList.add(activeSelector);
+    };
 
     hideTabContent();
     showTabContent();
@@ -24,15 +31,15 @@ const tabs = (headerSelector: any, tabSelector: any, contentSelector: any, activ
         const target = e.target;
         if (target.classList.contains(tabSelector.replace(/\./, ''))
             || target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
-            tab.forEach((item: HTMLElement, i: number) => {
-                if (target == item || target.parentNode == item) {
+            tabs.forEach((tab: HTMLElement, i: number) => {
+                if (target == tab || target.parentNode == tab) {
                     hideTabContent();
-                    showTabContent(i)
+                    showTabContent(i);
                 }
-            })
+            });
         }
-    })
-}
+    });
+};
 
 
-export default tabs;
+
