@@ -14067,6 +14067,8 @@ const modals = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/ts/slider.ts");
 /* harmony import */ var _modals_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/modals */ "./src/modals/modals.ts");
+/* harmony import */ var _modals_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/tabs */ "./src/modals/tabs.ts");
+
 
 
 window.addEventListener('DOMContentLoaded', () => {

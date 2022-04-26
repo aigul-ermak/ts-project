@@ -1,4 +1,5 @@
 export const modals = () => {
+
     type bindModalType = {
         triggersSelector: string
         modalSelector: string
@@ -26,6 +27,7 @@ export const modals = () => {
 
         close.addEventListener('click', () => closeModal('none', ''))
 
+
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {
                 closeModal('none', '')
@@ -51,7 +53,5 @@ export const modals = () => {
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
     })
 
-    showModalByTime('.popup', 3000)
+    // showModalByTime('.popup', 3000)
 }
-
-
