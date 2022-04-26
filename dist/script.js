@@ -14013,6 +14013,7 @@ __webpack_require__.r(__webpack_exports__);
 const modals = () => {
     const bindModal = ({ triggersSelector, modalSelector, closeSelector }) => {
         const triggers = document.querySelectorAll(triggersSelector), modal = document.querySelector(modalSelector), close = document.querySelector(closeSelector);
+        console.log(typeof triggers);
         const closeModal = (modalProperty, documentProperty) => {
             modal.style.display = modalProperty;
             document.body.style.overflow = documentProperty;
@@ -14025,7 +14026,9 @@ const modals = () => {
                 closeModal('block', 'hidden');
             });
         });
-        close.addEventListener('click', () => closeModal('none', ''));
+        close.addEventListener('click', () => {
+            closeModal('none', '');
+        });
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal('none', '');
@@ -14047,7 +14050,7 @@ const modals = () => {
         triggersSelector: '.phone_link',
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
     });
-    showModalByTime('.popup', 3000);
+    // showModalByTime('.popup', 3000)
 };
 
 
