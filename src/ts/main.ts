@@ -1,8 +1,6 @@
 import './slider';
 
-import {modals} from '../modals/modals';
-import {tabs} from '../modals/tabs';
-
+import {modals, tabs} from '../modals';
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
@@ -18,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
         contentSelector: '.decoration_content > div > div',
         activeSelector: 'after_click'
     });
-})
+});
 
 
 
