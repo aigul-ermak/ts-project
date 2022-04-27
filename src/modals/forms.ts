@@ -8,7 +8,7 @@ export const forms = () => {
                 phoneInput.value = phoneInput.value.replace(/\D/, '')
             }
         )
-    })
+    });
 
     const message = {
         loading: 'Loading...',
