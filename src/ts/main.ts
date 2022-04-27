@@ -5,7 +5,6 @@ import {tabs} from '../modals/tabs';
 import {forms} from '../modals/forms';
 import {changeModalState} from '../modals/changeModalState';
 
-
 window.addEventListener('DOMContentLoaded', () => {
     'use strict'
 

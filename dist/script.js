@@ -14012,6 +14012,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeModalState", function() { return changeModalState; });
 /* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/modals/checkNumInputs.ts");
 
+//не знаю как типизировать state
 const changeModalState = (state) => {
     const windowForms = document.querySelectorAll('.balcon_icons_img'), windowWidth = document.querySelectorAll('#width'), windowHeight = document.querySelectorAll('#height'), windowType = document.querySelectorAll('#view_type'), windowProfile = document.querySelectorAll('.checkbox');
     Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["checkNumInputs"])('#width');
@@ -14046,11 +14047,9 @@ const changeModalState = (state) => {
             });
         });
     }
-    console.log(state);
     windowForms.forEach((windowForm, i) => {
         windowForm.addEventListener('click', () => {
             state.form = (i);
-            // console.log(state)
         });
     });
     bindActionToElems({
@@ -14117,6 +14116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forms", function() { return forms; });
 /* harmony import */ var _checkNumInputs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkNumInputs */ "./src/modals/checkNumInputs.ts");
 
+//не знаю как типизировать state
 const forms = (state) => {
     const forms = document.querySelectorAll('form'), inputs = document.querySelectorAll('input');
     Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["checkNumInputs"])('input[name = "user_phone"]');
@@ -14125,6 +14125,7 @@ const forms = (state) => {
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     };
+    //могу поставить data: any? так как не знаю в каком формате
     const postData = async (url, data) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -14132,7 +14133,6 @@ const forms = (state) => {
             body: data
         });
         return await res.text();
-        // console.log(res.text())
     };
     const clearInputs = () => {
         inputs.forEach((input) => {
@@ -14183,9 +14183,7 @@ __webpack_require__.r(__webpack_exports__);
 const modals = () => {
     const bindModal = ({ triggersSelector, modalSelector, closeSelector, closeClickOverlay = true }) => {
         const triggers = document.querySelectorAll(triggersSelector), modal = document.querySelector(modalSelector), close = document.querySelector(closeSelector), windows = document.querySelectorAll('[data-modal]');
-        windows.forEach(window => {
-            window.style.display = 'none';
-        });
+        windows.forEach(window => window.style.display = 'none');
         const closeModal = (modalProperty, documentProperty) => {
             modal.style.display = modalProperty;
             document.body.style.overflow = documentProperty;
@@ -14198,9 +14196,7 @@ const modals = () => {
                 closeModal('block', 'hidden');
             });
         });
-        close.addEventListener('click', () => {
-            closeModal('none', '');
-        });
+        close.addEventListener('click', () => closeModal('none', ''));
         modal.addEventListener('click', (e) => {
             if (e.target === modal && closeClickOverlay) {
                 closeModal('none', '');
@@ -14208,7 +14204,7 @@ const modals = () => {
         });
     };
     const showModalByTime = (selector, time) => {
-        setTimeout(function () {
+        setTimeout(() => {
             document.querySelector(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
         }, time);

@@ -1,12 +1,21 @@
 import {checkNumInputs} from './checkNumInputs';
-import {populateDependencyGraph} from 'ts-loader/dist/utils';
+
+// export type stateType = {
+//     form: number
+//     width: number
+//     height: number
+//     type: string
+//     profile: string
+// }
 
 type bindActionToElem = {
     event: string
-    elem: any
+        // не знаю как типизировать elems, он же и инпут и элемент, функция не пропускает
+    // elems: NodeListOf<HTMLElement> | NodeListOf<HTMLInputElement>
+    elems: any
     prop: string
 }
-
+//не знаю как типизировать state
 export const changeModalState = (state: any) => {
     const windowForms: NodeListOf<HTMLElement> = document.querySelectorAll('.balcon_icons_img'),
         windowWidth: NodeListOf<HTMLElement> = document.querySelectorAll('#width'),
@@ -17,8 +26,8 @@ export const changeModalState = (state: any) => {
     checkNumInputs('#width');
     checkNumInputs('#height');
 
-    function bindActionToElems({event, elems, prop}: any) {
-        elems.forEach((elem: HTMLInputElement, i: HTMLElement) => {
+    function bindActionToElems({event, elems, prop}: bindActionToElem) {
+        elems.forEach((elem: any, i: HTMLElement) => {
                 elem.addEventListener(event, () => {
                     switch (elem.nodeName) {
                         case 'SPAN' :
@@ -46,18 +55,13 @@ export const changeModalState = (state: any) => {
                 })
             }
         )
-
     }
-
-    console.log(state)
 
     windowForms.forEach((windowForm, i) => {
         windowForm.addEventListener('click', () => {
-            state.form = (i)
-            // console.log(state)
+            state.form = (i);
         })
-    })
-
+    });
 
     bindActionToElems({
         event: 'click',
@@ -84,4 +88,4 @@ export const changeModalState = (state: any) => {
         elems: windowProfile,
         prop: 'profile'
     });
-}
+};

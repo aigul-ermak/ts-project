@@ -1,5 +1,5 @@
 import {checkNumInputs} from './checkNumInputs';
-
+//не знаю как типизировать state
 export const forms = (state: any) => {
     const forms: NodeListOf<HTMLElement> = document.querySelectorAll('form'),
         inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
@@ -10,8 +10,8 @@ export const forms = (state: any) => {
         loading: 'Loading...',
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
-    }
-
+    };
+//могу поставить data: any? так как не знаю в каком формате
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -19,14 +19,13 @@ export const forms = (state: any) => {
             body: data
         })
         return await res.text();
-        // console.log(res.text())
-    }
+    };
 
     const clearInputs = () => {
-        inputs.forEach((input: any) => {
+        inputs.forEach((input: HTMLInputElement) => {
             input.value = ''
         })
-    }
+    };
 
     forms.forEach((form: HTMLFormElement) => {
         form.addEventListener('submit', (e: KeyboardEvent) => {
@@ -56,7 +55,5 @@ export const forms = (state: any) => {
                     statusMessage.remove()
                 }, 5000)
             })
-    })
-
-
-}
+    });
+};
