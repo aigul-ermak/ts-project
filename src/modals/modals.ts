@@ -1,17 +1,15 @@
-type bindModalType = {
-    triggersSelector: any
-    modalSelector: string
-    closeSelector: string
-};
-
 export const modals = () => {
+
+    type bindModalType = {
+        triggersSelector: string
+        modalSelector: string
+        closeSelector: string
+    }
 
     const bindModal = ({triggersSelector, modalSelector, closeSelector}: bindModalType) => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
             close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
-
-        console.log(typeof triggers)
 
         const closeModal = (modalProperty: string, documentProperty: string) => {
             modal.style.display = modalProperty;
@@ -25,7 +23,7 @@ export const modals = () => {
                 }
                 closeModal('block', 'hidden')
             })
-        })
+        });
 
         close.addEventListener('click', () => closeModal('none', ''));
 
@@ -33,15 +31,15 @@ export const modals = () => {
             if (e.target === modal) {
                 closeModal('none', '')
             }
-        })
-    }
+        });
+    };
 
     const showModalByTime = (selector: string, time: number) => {
-        setTimeout(() => {
+        setTimeout(function () {
             document.querySelector<HTMLElement>(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
-        }, time)
-    }
+        }, time);
+    };
 
     bindModal({
         triggersSelector: '.popup_engineer_btn',
@@ -52,7 +50,7 @@ export const modals = () => {
     bindModal({
         triggersSelector: '.phone_link',
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
-    })
+    });
 
     // showModalByTime('.popup', 3000)
 }
