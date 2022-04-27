@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
         contentSelector: '.decoration_content > div > div',
         activeSelector: 'after_click'
     });
+
     forms();
 })
 
