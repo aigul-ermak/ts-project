@@ -23,24 +23,23 @@ export const modals = () => {
                 }
                 closeModal('block', 'hidden')
             })
-        })
+        });
 
-        close.addEventListener('click', () => closeModal('none', ''))
-
+        close.addEventListener('click', () => closeModal('none', ''));
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {
                 closeModal('none', '')
             }
-        })
-    }
+        });
+    };
 
     const showModalByTime = (selector: string, time: number) => {
         setTimeout(function () {
             document.querySelector<HTMLElement>(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
-        }, time)
-    }
+        }, time);
+    };
 
     bindModal({
         triggersSelector: '.popup_engineer_btn',
@@ -51,7 +50,7 @@ export const modals = () => {
     bindModal({
         triggersSelector: '.phone_link',
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
-    })
+    });
 
     // showModalByTime('.popup', 3000)
 }
