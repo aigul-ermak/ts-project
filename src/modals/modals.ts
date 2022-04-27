@@ -1,7 +1,7 @@
 export const modals = () => {
 
     type bindModalType = {
-        triggersSelector: any
+        triggersSelector: string
         modalSelector: string
         closeSelector: string
     }
@@ -25,9 +25,7 @@ export const modals = () => {
             })
         });
 
-        close.addEventListener('click', () => {
-            closeModal('none', '')
-        });
+        close.addEventListener('click', () => closeModal('none', ''));
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal) {

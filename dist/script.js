@@ -14056,49 +14056,6 @@ const modals = () => {
 
 /***/ }),
 
-/***/ "./src/modals/tabs.ts":
-/*!****************************!*\
-  !*** ./src/modals/tabs.ts ***!
-  \****************************/
-/*! exports provided: tabs */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabs", function() { return tabs; });
-const tabs = ({ headerSelector, tabSelector, contentSelector, activeSelector }) => {
-    const header = document.querySelector(headerSelector), tabs = document.querySelectorAll(tabSelector), content = document.querySelectorAll(contentSelector);
-    const hideTabContent = () => {
-        content.forEach((tab) => {
-            tab.style.display = 'none';
-            tabs.forEach((tab) => {
-                tab.classList.remove(activeSelector);
-            });
-        });
-    };
-    const showTabContent = (i = 0) => {
-        content[i].style.display = 'block';
-        tabs[i].classList.add(activeSelector);
-    };
-    hideTabContent();
-    showTabContent();
-    header.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target.classList.contains(tabSelector.replace(/\./, ''))
-            || target.parentNode.classList.contains(tabSelector.replace(/\./, ''))) {
-            tabs.forEach((tab, i) => {
-                if (target == tab || target.parentNode == tab) {
-                    hideTabContent();
-                    showTabContent(i);
-                }
-            });
-        }
-    });
-};
-
-
-/***/ }),
-
 /***/ "./src/ts/main.ts":
 /*!************************!*\
   !*** ./src/ts/main.ts ***!
@@ -14116,18 +14073,6 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener('DOMContentLoaded', () => {
     Object(_modals_modals__WEBPACK_IMPORTED_MODULE_1__["modals"])();
-    Object(_modals_tabs__WEBPACK_IMPORTED_MODULE_2__["tabs"])({
-        headerSelector: '.glazing_slider',
-        tabSelector: '.glazing_block',
-        contentSelector: '.glazing_content',
-        activeSelector: 'active'
-    });
-    Object(_modals_tabs__WEBPACK_IMPORTED_MODULE_2__["tabs"])({
-        headerSelector: '.decoration_slider',
-        tabSelector: '.no_click',
-        contentSelector: '.decoration_content > div > div',
-        activeSelector: 'after_click'
-    });
 });
 
 
