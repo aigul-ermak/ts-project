@@ -44,7 +44,7 @@ export const modals = () => {
                 closeModal('none', '');
             }
         });
-        //закрытие модального окга при нажатии на esc
+        //закрытие модального окна при нажатии на esc
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Escape') {
                 closeModal('none', '');

@@ -26,7 +26,6 @@ export const forms = () => {
     };
 
     const clearInputs = () => inputs.forEach((input: HTMLInputElement) => input.value = '');
-    // const autoFocusInput = () => inputs.forEach((input: HTMLInputElement) => input.autofocus = true);
 
     forms.forEach((form: HTMLFormElement) => {
         // autoFocusInput();
