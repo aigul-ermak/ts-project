@@ -28,8 +28,13 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     hideTabContent();
     showTabContent();
 
-    header.addEventListener('click', (e: KeyboardEvent) => {
+    header.addEventListener('click', (e: any) => {
+        const isTabPressed = e.keyCode === 9 || e.keyCode === 'Tab'
         const target = e.target as Element;
+        if (!isTabPressed) {
+            return;
+        }
+
         if (target.classList.contains(tabSelector.replace(/\./, ''))
             || (target.parentNode as Element).classList.contains(tabSelector.replace(/\./, ''))) {
             tabs.forEach((tab: HTMLElement, i: number) => {
@@ -37,10 +42,12 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
                     hideTabContent();
                     showTabContent(i);
                 }
+                //не знаю как связать по кнопке таб
+                if (e.shiftKey) {
+                    showTabContent(i);
+                }
             });
         }
     });
 };
-
-
 
