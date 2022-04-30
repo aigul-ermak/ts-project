@@ -28,9 +28,8 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     hideTabContent();
     showTabContent();
 
-    header.addEventListener('click', (e: any) => {
+    const showBindedTabContent = (e: KeyboardEvent) => {
         const target = e.target as Element;
-
         if (target.classList.contains(tabSelector.replace(/\./, ''))
             || (target.parentNode as Element).classList.contains(tabSelector.replace(/\./, ''))) {
             tabs.forEach((tab: HTMLElement, i: number) => {
@@ -40,18 +39,15 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
                 }
             });
         }
+    };
+
+    header.addEventListener('click', (e: KeyboardEvent) => {
+        showBindedTabContent(e);
     });
 
-    header.addEventListener('keydown', (e: any) => {
-        debugger
-        if (e.key === 'Enter') {
-            tabs.forEach((tab: any, i : number) => {
-                if(tab.focused) {
-                    showTabContent(i);
-                }
-            })
-        }
-    })
+    header.addEventListener('keydown', (e: KeyboardEvent) => {
+        showBindedTabContent(e);
+    });
 
 };
 
