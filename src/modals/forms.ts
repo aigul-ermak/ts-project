@@ -28,7 +28,6 @@ export const forms = () => {
     const clearInputs = () => inputs.forEach((input: HTMLInputElement) => input.value = '');
 
     forms.forEach((form: HTMLFormElement) => {
-        // autoFocusInput();
         form.addEventListener('submit', (e: KeyboardEvent) => {
             e.preventDefault();
         })

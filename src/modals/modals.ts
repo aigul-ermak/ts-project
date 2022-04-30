@@ -31,9 +31,7 @@ export const modals = () => {
                     e.preventDefault();
                 }
                 closeModal('block', 'hidden');
-                // добавила атрибут tabindex="0" в класс модалки .popup_engineer_btn
-                //при двойном(?) нажатии на tab - появляется фокус
-                modal.focus();
+
             });
         });
 
@@ -44,6 +42,7 @@ export const modals = () => {
                 closeModal('none', '');
             }
         });
+
         //закрытие модального окна при нажатии на esc
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Escape') {
