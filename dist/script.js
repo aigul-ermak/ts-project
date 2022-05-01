@@ -14146,7 +14146,9 @@ const modals = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabs", function() { return tabs; });
+
 const tabs = ({ headerSelector, tabSelector, contentSelector, activeSelector, display = 'block' }) => {
+
     const header = document.querySelector(headerSelector), tabs = document.querySelectorAll(tabSelector), content = document.querySelectorAll(contentSelector);
     const hideTabContent = () => {
         content.forEach((tab) => {
@@ -14157,7 +14159,9 @@ const tabs = ({ headerSelector, tabSelector, contentSelector, activeSelector, di
         });
     };
     const showTabContent = (i = 0) => {
+
         content[i].style.display = display;
+
         tabs[i].classList.add(activeSelector);
     };
     hideTabContent();
@@ -14210,6 +14214,7 @@ window.addEventListener('DOMContentLoaded', () => {
         contentSelector: '.decoration_content > div > div',
         activeSelector: 'after_click'
     });
+
     Object(_modals_tabs__WEBPACK_IMPORTED_MODULE_2__["tabs"])({
         headerSelector: '.balcon_icons',
         tabSelector: '.balcon_icons_img',
@@ -14217,8 +14222,7 @@ window.addEventListener('DOMContentLoaded', () => {
         activeSelector: 'do_image_more',
         display: 'inline-block'
     });
-    Object(_modals_forms__WEBPACK_IMPORTED_MODULE_3__["forms"])();
-});
+
 
 
 /***/ }),

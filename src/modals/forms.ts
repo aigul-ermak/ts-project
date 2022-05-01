@@ -39,14 +39,14 @@ export const forms = () => {
 
         postData('assets/server.php', formData)
             .then(res => {
-                console.log(res)
+                console.log(res);
             })
             .catch(() => statusMessage.textContent = message.failure)
             .finally(() => {
                 clearInputs();
                 setTimeout(() => {
                     statusMessage.remove()
-                }, 5000)
-            })
-    })
-}
+                }, 5000);
+            });
+    });
+};

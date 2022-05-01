@@ -24,8 +24,4 @@ window.addEventListener('DOMContentLoaded', () => {
         display: 'inline-block'
     });
     forms();
-})
-
-
-
-
+});
