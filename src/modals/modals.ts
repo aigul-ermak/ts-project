@@ -1,6 +1,3 @@
-
-
-
 type bindModalType = {
     triggersSelector: string
     modalSelector: string

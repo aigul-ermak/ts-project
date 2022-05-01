@@ -10,40 +10,32 @@ import {checkNumInputs} from './checkNumInputs';
 
 type bindActionToElem = {
     event: string
-        // не знаю как типизировать elems, он же и инпут и элемент, функция не пропускает
-    // elems: NodeListOf<HTMLElement> | NodeListOf<HTMLInputElement>
-    elems: any
+    elems: NodeList
     prop: string
 }
-//не знаю как типизировать state
+
 export const changeModalState = (state: any) => {
     const windowForms: NodeListOf<HTMLElement> = document.querySelectorAll('.balcon_icons_img'),
         windowWidth: NodeListOf<HTMLElement> = document.querySelectorAll('#width'),
         windowHeight: NodeListOf<HTMLElement> = document.querySelectorAll('#height'),
         windowType: NodeListOf<HTMLElement> = document.querySelectorAll('#view_type'),
-        windowProfile: NodeListOf<HTMLElement> = document.querySelectorAll('.checkbox')
+        windowProfile: NodeListOf<HTMLElement> = document.querySelectorAll('.radio')
 
     checkNumInputs('#width');
     checkNumInputs('#height');
 
     function bindActionToElems({event, elems, prop}: bindActionToElem) {
-        elems.forEach((elem: any, i: HTMLElement) => {
+        elems.forEach((elem: any, i: number) => {
                 elem.addEventListener(event, () => {
                     switch (elem.nodeName) {
                         case 'SPAN' :
                             state[prop] = i
                             break
                         case 'INPUT' :
-                            if (elem.getAttribute('type') === 'checkbox') {
-                                // @ts-ignore
-                                i === 0 ? state[prop] = 'Холодное' : state[prop] = 'Теплое';
-                            } else {
-                                elems.forEach((box: any, j: any) => {
-                                    elem.checked = false;
-                                    if (i == j) {
-                                        box.Checked = true
-                                    }
-                                })
+                            if(elem.type =='radio')  {
+                                state[prop] =  i ? 'Теплое': 'Холодное'
+                            }
+                            else {
                                 state[prop] = elem.value;
                             }
                             break;

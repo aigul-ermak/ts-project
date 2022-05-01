@@ -1,5 +1,5 @@
 import {checkNumInputs} from './checkNumInputs';
-//не знаю как типизировать state
+
 export const forms = (state: any) => {
     const forms: NodeListOf<HTMLElement> = document.querySelectorAll('form'),
         inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('input');
@@ -39,8 +39,7 @@ export const forms = (state: any) => {
 
         if (form.getAttribute('data-calc') === 'end') {
             for (let key in state) {
-                formData.append(key, state[key])
-            }
+              formData.append(key, state[key])           }
         }
 
         postData('assets/server.php', formData)
