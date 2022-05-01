@@ -1,3 +1,6 @@
+
+
+
 type bindModalType = {
     triggersSelector: string
     modalSelector: string
@@ -23,15 +26,21 @@ export const modals = () => {
         const closeModal = (modalProperty: string, documentProperty: string) => {
             modal.style.display = modalProperty;
             document.body.style.overflow = documentProperty;
+
         }
 
         triggers.forEach((trigger: HTMLElement) => {
+
             trigger.addEventListener('click', (e: KeyboardEvent) => {
+
                 if (e.target) {
                     e.preventDefault();
                 }
                 closeModal('block', 'hidden');
-
+                 //этот код не работает
+                if (document.querySelector(`${modalSelector}.input:not([type = 'radio'])`) ) {
+                    document.querySelector<HTMLInputElement>(`${modalSelector}.input:not([type = 'radio'])`).focus();
+                }
             });
         });
 
@@ -42,7 +51,6 @@ export const modals = () => {
                 closeModal('none', '');
             }
         });
-
         //закрытие модального окна при нажатии на esc
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Escape') {
