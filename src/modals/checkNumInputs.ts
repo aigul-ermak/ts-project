@@ -6,5 +6,4 @@ export const checkNumInputs = (selector: string) => {
             }
         )
     })
-
 }

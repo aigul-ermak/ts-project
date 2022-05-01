@@ -11,7 +11,7 @@ export const forms = (state: any) => {
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     };
-//могу поставить data: any? так как не знаю в каком формате
+
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
