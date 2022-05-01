@@ -14,27 +14,24 @@ export const forms = () => {
         loading: 'Loading...',
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
-    }
+    };
 
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
-        let res = await fetch(url, {
+        const res = await fetch(url, {
             method: 'POST',
             body: data
         })
         return await res.text();
     };
 
-
-    const clearInputs = () => {
-        inputs.forEach((input: any) => input.value = '');
-    }
+    const clearInputs = () => inputs.forEach((input: HTMLInputElement) => input.value = '');
 
     forms.forEach((form: HTMLFormElement) => {
         form.addEventListener('submit', (e: KeyboardEvent) => {
             e.preventDefault();
         })
-        let statusMessage = document.createElement('div');
+        const statusMessage = document.createElement('div');
         statusMessage.classList.add('status');
         form.appendChild(statusMessage);
 

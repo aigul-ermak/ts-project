@@ -28,7 +28,7 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     hideTabContent();
     showTabContent();
 
-    header.addEventListener('click', (e: KeyboardEvent) => {
+    const showBindedTabContent = (e: KeyboardEvent) => {
         const target = e.target as Element;
         if (target.classList.contains(tabSelector.replace(/\./, ''))
             || (target.parentNode as Element).classList.contains(tabSelector.replace(/\./, ''))) {
@@ -39,8 +39,15 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
                 }
             });
         }
+    };
+
+    header.addEventListener('click', (e: KeyboardEvent) => {
+        showBindedTabContent(e);
     });
+
+    header.addEventListener('keydown', (e: KeyboardEvent) => {
+        showBindedTabContent(e);
+    });
+
 };
-
-
 
