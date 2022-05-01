@@ -8,7 +8,7 @@ export const forms = () => {
                 phoneInput.value = phoneInput.value.replace(/\D/, '')
             }
         )
-    })
+    });
 
     const message = {
         loading: 'Loading...',
@@ -24,6 +24,7 @@ export const forms = () => {
         })
         return await res.text();
     };
+
 
     const clearInputs = () => {
         inputs.forEach((input: any) => input.value = '');
@@ -41,16 +42,14 @@ export const forms = () => {
 
         postData('assets/server.php', formData)
             .then(res => {
-                console.log(res)
+                console.log(res);
             })
             .catch(() => statusMessage.textContent = message.failure)
             .finally(() => {
                 clearInputs();
                 setTimeout(() => {
                     statusMessage.remove()
-                }, 5000)
-            })
-    })
-
-
-}
+                }, 5000);
+            });
+    });
+};
