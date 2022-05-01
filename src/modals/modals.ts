@@ -1,15 +1,19 @@
+type bindModalType = {
+    triggersSelector: any
+    modalSelector: string
+    closeSelector: string
+    closeClickOverlay?: boolean
+};
+
 export const modals = () => {
 
-    type bindModalType = {
-        triggersSelector: string
-        modalSelector: string
-        closeSelector: string
-    }
-
-    const bindModal = ({triggersSelector, modalSelector, closeSelector}: bindModalType) => {
+    const bindModal = ({triggersSelector, modalSelector, closeSelector, closeClickOverlay = true}: bindModalType) => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
-            close: HTMLElement = document.querySelector<HTMLElement>(closeSelector);
+            close: HTMLElement = document.querySelector<HTMLElement>(closeSelector),
+            windows: NodeListOf<HTMLElement> = document.querySelectorAll('[data-modal]');
+
+        windows.forEach(window => window.style.display = 'none');
 
         const closeModal = (modalProperty: string, documentProperty: string) => {
             modal.style.display = modalProperty;
@@ -19,27 +23,27 @@ export const modals = () => {
         triggers.forEach((trigger: HTMLElement) => {
             trigger.addEventListener('click', (e: KeyboardEvent) => {
                 if (e.target) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
-                closeModal('block', 'hidden')
-            })
+                closeModal('block', 'hidden');
+            });
         });
 
-        close.addEventListener('click', () => closeModal('none', ''));
+        close.addEventListener('click', () =>  closeModal('none', ''));
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
-            if (e.target === modal) {
-                closeModal('none', '')
+            if (e.target === modal && closeClickOverlay) {
+                closeModal('none', '');
             }
         });
     };
 
     const showModalByTime = (selector: string, time: number) => {
-        setTimeout(function () {
+        setTimeout( () => {
             document.querySelector<HTMLElement>(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
-        }, time);
-    };
+        }, time)
+    }
 
     bindModal({
         triggersSelector: '.popup_engineer_btn',
@@ -52,5 +56,22 @@ export const modals = () => {
         modalSelector: '.popup', closeSelector: '.popup .popup_close'
     });
 
+    bindModal({
+        triggersSelector: '.popup_calc_btn',
+        modalSelector: '.popup_calc',
+        closeSelector: '.popup_calc_close'
+    });
+    bindModal({
+        triggersSelector: '.popup_calc_button',
+        modalSelector: '.popup_calc_profile',
+        closeSelector: '.popup_calc_profile_close',
+        closeClickOverlay: false,
+    });
+    bindModal({
+        triggersSelector: '.popup_calc_profile_button',
+        modalSelector: '.popup_calc_end',
+        closeSelector: '.popup_calc_end_close',
+        closeClickOverlay: false,
+    });
     // showModalByTime('.popup', 3000)
 }

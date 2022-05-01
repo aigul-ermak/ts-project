@@ -15,7 +15,7 @@ export const forms = () => {
         success: 'Thank you! We"ll call you soon',
         failure: 'Something wrong...'
     }
-//вот тут приходит data - с разных форм - как определить тип
+
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
         let res = await fetch(url, {
@@ -23,7 +23,8 @@ export const forms = () => {
             body: data
         })
         return await res.text();
-    }
+    };
+
 
     const clearInputs = () => {
         inputs.forEach((input: any) => input.value = '');

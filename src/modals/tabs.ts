@@ -3,9 +3,10 @@ type tabsType = {
     tabSelector: string
     contentSelector: string
     activeSelector: string
+    display?: string
 }
 
-export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelector}: tabsType) => {
+export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelector, display = 'block'}: tabsType) => {
     const header: HTMLElement = document.querySelector(headerSelector),
         tabs: NodeListOf<HTMLElement> = document.querySelectorAll(tabSelector),
         content: NodeListOf<HTMLElement> = document.querySelectorAll(contentSelector)
@@ -20,7 +21,7 @@ export const tabs = ({headerSelector, tabSelector, contentSelector, activeSelect
     };
 
     const showTabContent = (i: number = 0) => {
-        content[i].style.display = 'block';
+        content[i].style.display = display;
         tabs[i].classList.add(activeSelector);
     };
 
