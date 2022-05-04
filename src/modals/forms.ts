@@ -14,7 +14,7 @@ export const forms = (state: any) => {
 
     const postData = async (url: string, data: any) => {
         document.querySelector('.status').textContent = message.loading;
-        let res = await fetch(url, {
+        const res = await fetch(url, {
             method: 'POST',
             body: data
         })
@@ -31,7 +31,7 @@ export const forms = (state: any) => {
         form.addEventListener('submit', (e: KeyboardEvent) => {
             e.preventDefault()
         })
-        let statusMessage = document.createElement('div');
+        const statusMessage = document.createElement('div');
         statusMessage.classList.add('status')
         form.appendChild(statusMessage)
 

@@ -8,7 +8,7 @@ import {changeModalState} from '../modals/changeModalState';
 window.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
-    let modalState = {};
+    const modalState = {};
 
     changeModalState(modalState);
     modals();
@@ -32,7 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
         display: 'inline-block'
     });
     forms(modalState);
-
 })
 
 

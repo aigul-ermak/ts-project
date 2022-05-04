@@ -15,7 +15,7 @@ export const modals = () => {
 
         windows.forEach(window => window.style.display = 'none');
 
-        const closeModal = (modalProperty: string, documentProperty: string) => {
+        const closeModal = (modalProperty: string, documentProperty: string | '') => {
             modal.style.display = modalProperty;
             document.body.style.overflow = documentProperty;
         }

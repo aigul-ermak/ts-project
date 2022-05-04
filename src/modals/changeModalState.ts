@@ -25,22 +25,23 @@ export const changeModalState = (state: any) => {
     checkNumInputs('#height');
 
     function bindActionToElems({event, elems, prop}: bindActionToElem) {
-        elems.forEach((elem: any, i: number) => {
-                elem.addEventListener(event, () => {
-                    switch (elem.nodeName) {
+        elems.forEach((element: any, property: number) => {
+            element.addEventListener(event, () => {
+                    switch (element.nodeName) {
                         case 'SPAN' :
-                            state[prop] = i
+                            state[prop] = property
                             break
                         case 'INPUT' :
-                            if(elem.type =='radio')  {
-                                state[prop] = elem.value ? elem.checked : elem
+                            if(element.getAttribute('type') === 'radio')  {
+                                     state[property] = property === 0 ? 'Холодное' : 'Тёплое'
+                                     // state[property] = element.value
                             }
                            else {
-                                state[prop] = elem.value;
+                                state[prop] = element.value;
                             }
                             break;
                         case 'SELECT' :
-                            state[prop] = elem.value;
+                            state[prop] = element.value;
                             break;
                     }
                     console.log(state);
