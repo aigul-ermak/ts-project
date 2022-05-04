@@ -5,8 +5,8 @@ import {modals, tabs, forms,changeModalState, timer } from '../modals';
 window.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
-    let modalState = {};
-    let deadline = '2022-05-09';
+    const modalState = {};
+    const deadline = '2022-05-09';
 
     changeModalState(modalState);
     modals();
