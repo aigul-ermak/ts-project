@@ -1,6 +1,3 @@
-
-
-
 type bindModalType = {
     triggersSelector: string
     modalSelector: string
@@ -93,4 +90,4 @@ export const modals = () => {
         closeClickOverlay: false,
     });
     // showModalByTime('.popup', 3000)
-}
+};

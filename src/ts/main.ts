@@ -1,8 +1,14 @@
 import './slider';
 
-import {modals, tabs, forms} from '../modals';
+import {modals, tabs, forms,changeModalState, timer } from '../modals';
 
 window.addEventListener('DOMContentLoaded', () => {
+    'use strict'
+
+    const modalState = {};
+    const deadline = '2022-05-09';
+
+    changeModalState(modalState);
     modals();
     tabs({
         headerSelector: '.glazing_slider',
@@ -23,5 +29,10 @@ window.addEventListener('DOMContentLoaded', () => {
         activeSelector: 'do_image_more',
         display: 'inline-block'
     });
-    forms();
-});
+    forms(modalState);
+    timer('.container1', deadline);
+})
+
+
+
+
