@@ -1,6 +1,3 @@
-
-
-
 type bindModalType = {
     triggersSelector: string
     modalSelector: string
@@ -19,7 +16,8 @@ export const modals = () => {
         const triggers: NodeListOf<HTMLElement> = document.querySelectorAll(triggersSelector),
             modal: HTMLElement = document.querySelector<HTMLElement>(modalSelector),
             close: HTMLElement = document.querySelector<HTMLElement>(closeSelector),
-            windows: NodeListOf<HTMLElement> = document.querySelectorAll('[data-modal]')
+            windows: NodeListOf<HTMLElement> = document.querySelectorAll('[data-modal]'),
+        scroll = calcScroll();
 
         windows.forEach(window => window.style.display = 'none');
 
@@ -36,7 +34,10 @@ export const modals = () => {
                 if (e.target) {
                     e.preventDefault();
                 }
+                windows.forEach(window => window.style.display = 'none');
+
                 closeModal('block', 'hidden');
+                document.body.style.marginRight = `${scroll}px`
                  //этот код не работает
                 if (document.querySelector(`${modalSelector}.input:not([type = 'radio'])`) ) {
                     document.querySelector<HTMLInputElement>(`${modalSelector}.input:not([type = 'radio'])`).focus();
@@ -44,11 +45,19 @@ export const modals = () => {
             });
         });
 
-        close.addEventListener('click', () => closeModal('none', ''));
+        close.addEventListener('click', () => {
+            windows.forEach(window => window.style.display = 'none');
+
+            closeModal('none', '')
+
+            document.body.style.marginRight = `${0}px`
+        })
 
         modal.addEventListener('click', (e: KeyboardEvent) => {
             if (e.target === modal && closeClickOverlay) {
+                windows.forEach(window => window.style.display = 'none');
                 closeModal('none', '');
+                document.body.style.marginRight = `${0}px`
             }
         });
         //закрытие модального окна при нажатии на esc
@@ -65,6 +74,20 @@ export const modals = () => {
             document.body.style.overflow = 'hidden';
         }, time)
     };
+
+    const calcScroll = () => {
+        const div = document.createElement('div');
+
+        div.style.width = '50px';
+        div.style.height = '50px';
+        div.style.overflowY = 'scroll';
+        div.style.visibility = 'hidden';
+
+        document.body.appendChild(div);
+        const scrollWidth = div.offsetWidth - div.clientWidth;
+        div.remove();
+        return scrollWidth;
+    }
 
     bindModal({
         triggersSelector: '.popup_engineer_btn',
@@ -93,4 +116,4 @@ export const modals = () => {
         closeClickOverlay: false,
     });
     // showModalByTime('.popup', 3000)
-}
+};

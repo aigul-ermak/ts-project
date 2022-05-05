@@ -151,14 +151,14 @@
           </div>
           <div class="glazing_block text-center wow fadeInUp" data-wow-delay="0.4s" >
 
-      
+
             <img src="assets/img/glazing/icons/5.png" alt="#">
             <a class="rise_link">Остекление <br>с выносом</a>
           </div>
         </div>
 
         <!-- Tree -->
-        <div class="row tree glazing_content">
+        <div class="row tree glazing_content faded">
 
           <div class="col-md-6 no-padding">
            <div class="glazing_cold">
@@ -197,7 +197,7 @@
         </div> <!-- /Tree -->
 
         <!-- Aluminum -->
-        <div class="row aluminum glazing_content">
+        <div class="row aluminum glazing_content faded">
 
           <div class="col-md-6 no-padding">
            <div class="glazing_cold">
@@ -236,7 +236,7 @@
         </div> <!-- /Aluminum -->
 
         <!-- Plastic -->
-        <div class="row plastic glazing_content">
+        <div class="row plastic glazing_content faded">
           <div class="col-md-6 col-md-offset-3 no-padding">
             <div class="glazing_warm">
               <h3>теплое</h3>
@@ -257,7 +257,7 @@
         </div> <!-- /Plastic -->
 
         <!-- French -->
-        <div class="row french glazing_content">
+        <div class="row french glazing_content faded">
           <div class="col-md-6 no-padding">
            <div class="glazing_cold">
              <h3>Пластик</h3>
@@ -295,7 +295,7 @@
         </div> <!-- /French -->
 
         <!-- Rise -->
-        <div class="row rise glazing_content">
+        <div class="row rise glazing_content faded">
 
           <div class="col-md-6 no-padding">
            <div class="glazing_cold">
@@ -884,14 +884,14 @@
                  </select>
                  <img src="assets/img/modal_calc/icon_cold.png" alt="">
                  <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="cold"></span>
+                     <input class="radio" type="radio" name="radio-test" value="Холодное">
+<!--                     <span class="checkbox-custom" id="cold"></span>-->
                      <span class="label">Холодное</span>
                  </label>
                  <img src="assets/img/modal_calc/icon_warm.png" alt="">
                  <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="warm"></span>
+                     <input class="radio" type="radio" name="radio-test" value="Теплое">
+<!--                     <span class="checkbox-custom" id="warm"></span>-->
                      <span class="label">Теплое</span>
                  </label>
 
@@ -904,7 +904,7 @@
             <div class="popup_content text-center">
                 <button type="button" class="popup_calc_end_close"><strong>&times;</strong></button>
                 <div class="popup_form">
-                    <form class="form" action="#">
+                    <form class="form" action="#" data-calc="end">
                       <h2>Спасибо за обращение! <br>Оставьте свои данные</h2>
                         <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
                         <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
